@@ -21,8 +21,11 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: List files (Debug)
+        run: ls -R
+
       - name: Run tests
-        run: pytest
+        run: pytest || (echo "Tests failed!" && exit 1)
 
   build-and-publish:
     runs-on: ubuntu-latest
