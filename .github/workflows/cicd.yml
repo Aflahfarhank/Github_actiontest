@@ -11,20 +11,20 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             # Use v4 or higher to get Node 20+ support
-            - name: Checkout code
-              uses: actions/checkout@v4 
+        - name: Checkout code
+          uses: actions/checkout@v4 
 
-            # Use v5 or higher
-            - name: Set up Python
-              uses: actions/setup-python@v5
-              with:
+        # Use v5 or higher
+        - name: Set up Python
+          uses: actions/setup-python@v5
+          with:
                python-version: '3.10'
 
-            - name: Install dependencies
-              run: pip install -r requirements.txt
+        - name: Install dependencies
+          run: pip install -r requirements.txt
 
-            - name: Run tests
-              run: pytest
+        - name: Run tests
+          run: pytest
     
     build-and-publish:
         runs-on: ubuntu-latest
@@ -47,6 +47,7 @@ jobs:
           uses: docker/build-push-action@v4
           with:
             context: .
+            file : ./Dockerfile
             push: true
             tags: ${{ secrets.DOCKER_USERNAME }}/my-docker-image:latest
             
